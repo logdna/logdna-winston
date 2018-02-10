@@ -18,7 +18,7 @@
 ## Install
 
 ```javascript
-$ npm install --save logdna-bunyan
+$ npm install --save logdna-winston
 ```
 
 ## API
