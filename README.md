@@ -30,24 +30,34 @@ Please see the [logdna](https://github.com/logdna/nodejs/) npm module for the AP
 This module also provides a transport object, which can be added to winston using:
 
 ```javascript
-var logdna = require('logdna-winston');
-var winston = require('winston');
-var options = {
+const logdnaWinston = require('logdna-winston');
+const winston = require('winston');
+const logger = winston.createLogger({});
+const options = {
     key: apikey,
     hostname: myHostname,
     ip: ipAddress,
     mac: macAddress,
     app: appName,
-    env: envName
+    env: envName,
+    index_meta: true // Defaults to false, when true ensures meta object will be searchable
 };
-
-// Defaults to false, when true ensures meta object will be searchable
-options.index_meta = true;
 
 // Only add this line in order to track exceptions
 options.handleExceptions = true;
 
-winston.add(winston.transports.Logdna, options);
+logger.add(new logdnaWinston(options));
+
+let meta = {
+    data:'Some information'
+};
+logger.log('info', 'Log from LogDNA-winston', meta);
+logger.log('debug', 'Log from LogDNA-winston', meta);
+logger.log('warn', 'Log from LogDNA-winston', meta);
+logger.log('error', 'Log from LogDNA-winston', meta);
+logger.info('Info: Log from LogDNA-winston', meta);
+logger.warn('Warn: Log from LogDNA-winston', meta);
+logger.error('Error: Log from LogDNA-winston', meta);
 ```
 
 ## License
