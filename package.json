@@ -38,6 +38,6 @@
   },
   "dependencies": {
     "logdna": "^2.0.0",
-    "winston": "^2.4.0"
+    "winston": "^3.2.1"
   }
 }
