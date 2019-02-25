@@ -14,20 +14,29 @@ module.exports = class LogDNATransport extends Transport {
         this.index_meta = options.index_meta || false;
     }
 
-    log(level, msg, meta, callback) {
-        if (meta instanceof Error) { meta = { error: meta.stack || meta.toString() }; }
+    log(info, callback) {
+        setImmediate(() => this.emit('logged', info));
 
-        if (!msg && !(Object.keys(meta).length === 0 && meta.constructor === Object)) {
-            msg = stringify(meta, null, 2, function() { return undefined; });
+        if (info instanceof Error) {
+            info = {
+                message: info.message
+                , level: 'error'
+                , error: info.stack || info.toString()
+            };
         }
-        meta = meta || {};
-        let opts = {
-            level: level
-            , index_meta: meta.index_meta || this.index_meta
-            , context: meta
+
+        if (!info.message) {
+            info.message = stringify(info, null, 2, function () { return undefined; });
+        }
+
+        const { level, message, ...meta } = info;
+        const opts = {
+            level: info.level
+            , index_meta: info.index_meta || this.index_meta
+            , context: meta || {}
         };
-        this.logger.log(msg, opts);
-        if (callback) { callback(null, true); }
+
+        this.logger.log(info.message, opts);
+        if (callback) { callback(); }
     }
 };
-
