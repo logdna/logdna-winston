@@ -38,7 +38,7 @@ module.exports = class LogDNATransport extends Transport {
         if (callback) { callback(); }
     }
 
-    // make sure all logs are flushed with the Stream closes
+    // make sure all logs are flushed when the Stream closes
     // https://nodejs.org/api/stream.html#stream_writable_final_callback
     _final(cb) {
         logdna.flushAll(cb);
