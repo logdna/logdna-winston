@@ -17,23 +17,21 @@ module.exports = class LogDNATransport extends Transport {
     log(info, callback) {
         setImmediate(() => this.emit('logged', info));
 
-        if (info instanceof Error) {
-            info = {
-                message: info.message
-                , level: 'error'
-                , error: info.stack || info.toString()
-            };
+        if (info.message instanceof Error) {
+            info.error = info.message.stack || info.message.toString();
+            info.message = info.message.message;
         }
 
         if (!info.message) {
             info.message = stringify(info, null, 2, function () { return undefined; });
         }
 
-        const { level, message, ...meta } = info;
+        const { level, message, index_meta, ...meta } = info;
+
         const opts = {
-            level: info.level
-            , index_meta: info.index_meta || this.index_meta
-            , context: meta || {}
+            level
+            , index_meta: index_meta !== undefined ? index_meta : this.index_meta
+            , meta: meta || {}
         };
 
         this.logger.log(info.message, opts);
