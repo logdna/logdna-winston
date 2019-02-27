@@ -1,5 +1,5 @@
 const Transport = require('winston-transport');
-const Logger = require('logdna').Logger;
+const logdna = require('logdna');
 const stringify = require('json-stringify-safe');
 
 /*
@@ -10,7 +10,7 @@ module.exports = class LogDNATransport extends Transport {
         super(options);
         this.name = options.name || 'LogDNA';
         this.level = options.level || '';
-        this.logger = new Logger(options.key, options);
+        this.logger = new logdna.Logger(options.key, options);
         this.index_meta = options.index_meta || false;
     }
 
@@ -36,5 +36,11 @@ module.exports = class LogDNATransport extends Transport {
 
         this.logger.log(info.message, opts);
         if (callback) { callback(); }
+    }
+
+    // make sure all logs are flushed with the Stream closes
+    // https://nodejs.org/api/stream.html#stream_writable_final_callback
+    _final(cb) {
+        logdna.flushAll(cb);
     }
 };
