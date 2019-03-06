@@ -1,5 +1,5 @@
 const Transport = require('winston-transport');
-const Logger = require('logdna').Logger;
+const logdna = require('logdna');
 const stringify = require('json-stringify-safe');
 
 /*
@@ -10,24 +10,37 @@ module.exports = class LogDNATransport extends Transport {
         super(options);
         this.name = options.name || 'LogDNA';
         this.level = options.level || '';
-        this.logger = new Logger(options.key, options);
+        this.logger = new logdna.Logger(options.key, options);
         this.index_meta = options.index_meta || false;
     }
 
-    log(level, msg, meta, callback) {
-        if (meta instanceof Error) { meta = { error: meta.stack || meta.toString() }; }
+    log(info, callback) {
+        setImmediate(() => this.emit('logged', info));
 
-        if (!msg && !(Object.keys(meta).length === 0 && meta.constructor === Object)) {
-            msg = stringify(meta, null, 2, function() { return undefined; });
+        if (info.message instanceof Error) {
+            info.error = info.message.stack || info.message.toString();
+            info.message = info.message.message;
         }
-        meta = meta || {};
-        let opts = {
-            level: level
-            , index_meta: meta.index_meta || this.index_meta
-            , context: meta
+
+        if (!info.message) {
+            info.message = stringify(info, null, 2, function () { return undefined; });
+        }
+
+        const { level, message, index_meta, ...meta } = info;
+
+        const opts = {
+            level
+            , index_meta: index_meta !== undefined ? index_meta : this.index_meta
+            , meta: meta || {}
         };
-        this.logger.log(msg, opts);
-        if (callback) { callback(null, true); }
+
+        this.logger.log(info.message, opts);
+        if (callback) { callback(); }
+    }
+
+    // make sure all logs are flushed when the Stream closes
+    // https://nodejs.org/api/stream.html#stream_writable_final_callback
+    _final(cb) {
+        logdna.flushAll(cb);
     }
 };
-
