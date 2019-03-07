@@ -40,6 +40,7 @@ const options = {
     mac: macAddress,
     app: appName,
     env: envName,
+    level: level, // Default to debug, maximum level of log, doc: https://github.com/winstonjs/winston#logging-levels
     index_meta: true // Defaults to false, when true ensures meta object will be searchable
 };
 
@@ -48,16 +49,18 @@ options.handleExceptions = true;
 
 logger.add(new logdnaWinston(options));
 
-let meta = {
-    data:'Some information'
-};
-logger.log('info', 'Log from LogDNA-winston', meta);
-logger.log('debug', 'Log from LogDNA-winston', meta);
-logger.log('warn', 'Log from LogDNA-winston', meta);
-logger.log('error', 'Log from LogDNA-winston', meta);
-logger.info('Info: Log from LogDNA-winston', meta);
-logger.warn('Warn: Log from LogDNA-winston', meta);
-logger.error('Error: Log from LogDNA-winston', meta);
+
+// log with meta
+logger.log({
+    level: 'info'
+    , message: 'Log from LogDNA-winston'
+    , index_meta: true // Ignore this if you would like to use default setting
+    , data:'Some information' //  Properties besides level, message and index_meta are considered as "meta"
+    , error: new Error("It's a trap.") // Transport will parse the error object under property 'error'
+});
+
+// log without meta
+logger.info('Info: Log from LogDNA-winston');
 ```
 
 ## License
