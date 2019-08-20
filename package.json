@@ -1,6 +1,6 @@
 {
   "name": "logdna-winston",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "LogDNA's Node.js logging module with support for Winston",
   "main": "index.js",
   "scripts": {
@@ -37,7 +37,7 @@
     "mocha": "^2.5.3"
   },
   "dependencies": {
-    "logdna": "^3.0.0",
+    "logdna": "^3.3.0",
     "winston": "^3.2.1"
   }
 }
