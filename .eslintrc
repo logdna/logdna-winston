@@ -7,6 +7,7 @@
     "globals": {
         "debug": false
     },
+    "parser": "babel-eslint",
     "rules": {
         "accessor-pairs": 0,
         "array-bracket-spacing": [2, "never"],
