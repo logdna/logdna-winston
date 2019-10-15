@@ -29,14 +29,8 @@
     "url": "https://github.com/logdna/logdna-winston/issues"
   },
   "homepage": "https://github.com/logdna/logdna-winston#readme",
-  "devDependencies": {
-    "assert": "^1.4.1",
-    "gulp": "^3.9.1",
-    "gulp-exit": "0.0.2",
-    "gulp-mocha": "^2.2.0",
-    "mocha": "^2.5.3"
-  },
   "dependencies": {
+    "eslint": "^6.5.1",
     "logdna": "^3.3.3",
     "winston": "^3.2.1"
   }
