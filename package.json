@@ -4,7 +4,7 @@
   "description": "LogDNA's Node.js logging module with support for Winston",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/gulp test"
+    "lint": "./node_modules/.bin/eslint -c .eslintrc *.js"
   },
   "repository": {
     "type": "git",
