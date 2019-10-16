@@ -39,7 +39,7 @@ module.exports = class LogDNATransport extends Transport {
             , index_meta: typeof info.index_meta === 'boolean' ? index_meta : this.index_meta
             , context: meta || {}
         };
-        
+
         this.logger.log(message, opts);
         if (callback) { callback(null, true); }
     }
