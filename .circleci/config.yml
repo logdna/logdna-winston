@@ -33,11 +33,11 @@ jobs:
               exit 1
             fi
       - run: npm install --production
-      - run: zip logdna.zip -r node_modules/ index.js package.json
+      - run: zip logdna-winston.zip -r node_modules/ index.js package.json
       - persist_to_workspace:
           root: .
           paths:
-            - ./logdna.zip
+            - ./logdna-winston.zip
   release:
     docker:
       - image: circleci/golang:1.12
@@ -53,7 +53,7 @@ jobs:
               -t ${GITHUB_TOKEN} \
               -u ${CIRCLE_PROJECT_USERNAME} \
               -r ${CIRCLE_PROJECT_REPONAME} \
-              -draft ${CIRCLE_TAG} ./logdna.zip
+              -draft ${CIRCLE_TAG} ./logdna-winston.zip
   approve:
     machine: true
     steps:
@@ -62,7 +62,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - ./logdna.zip
+            - ./logdna-winston.zip
   publish:
     docker:
       - image: circleci/node:10
