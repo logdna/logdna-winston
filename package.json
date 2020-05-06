@@ -30,11 +30,11 @@
   },
   "homepage": "https://github.com/logdna/logdna-winston#readme",
   "dependencies": {
-    "eslint": "^6.5.1",
     "logdna": "^3.5.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3"
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.5.1"
   }
 }
