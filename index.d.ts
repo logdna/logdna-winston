@@ -1,4 +1,4 @@
-import { ConstructorOptions } from "logdna"
+import { ConstructorOptions } from "logdna";
 import Transport from "winston-transport";
 
 declare class LogDNATransport extends Transport {
@@ -6,7 +6,9 @@ declare class LogDNATransport extends Transport {
 }
 
 declare namespace LogDNATransport {
-  interface TransportOptions extends Transport.TransportStreamOptions, ConstructorOptions {
+  interface TransportOptions
+    extends Transport.TransportStreamOptions,
+      ConstructorOptions {
     /** The LogDNA API key. */
     key: string;
     /** The name of this transport. */
