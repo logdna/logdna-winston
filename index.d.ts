@@ -11,8 +11,15 @@ declare namespace LogDNATransport {
       ConstructorOptions {
     /** The LogDNA API key. */
     key: string;
-    /** The name of this transport. */
+    /** The name of this transport (default: "LogDNA"). */
     name?: string;
+    /** Level of messages that this transport should log (default: "debug"). */
+    level?: string;
+    /**
+     * Allow meta objects to be passed with each line (default: false).
+     * See logger ConstructorOptions for more information.
+     */
+    index_meta?: boolean;
   }
 }
 
