@@ -15,13 +15,14 @@
 
 ## Install
 
-```javascript
+```sh
 $ npm install --save logdna-winston
 ```
 
 ## API
 
-Please see the [logdna](https://github.com/logdna/nodejs/) npm module for the API.
+Please see [@logdna/logger](https://www.npmjs.com/package/@logdna/logger#createloggerkey-options) for
+instantiation options to passthrough to LogDNA's logger client.
 
 ## Winston Transport
 
@@ -39,8 +40,8 @@ const options = {
     app: appName,
     env: envName,
     level: level, // Default to debug, maximum level of log, doc: https://github.com/winstonjs/winston#logging-levels
-    index_meta: true // Defaults to false, when true ensures meta object will be searchable
-};
+    indexMeta: true // Defaults to false, when true ensures meta object will be searchable
+}
 
 // Only add this line in order to track exceptions
 options.handleExceptions = true;
@@ -52,17 +53,25 @@ logger.add(new logdnaWinston(options));
 logger.log({
     level: 'info'
     , message: 'Log from LogDNA-winston'
-    , index_meta: true // Ignore this if you would like to use default setting
-    , data:'Some information' //  Properties besides level, message and index_meta are considered as "meta"
+    , indexMeta: true // Optional.  If not provided, it will use the default.
+    , data:'Some information' //  Properties besides level, message and indexMeta are considered as "meta"
     , error: new Error("It's a trap.") // Transport will parse the error object under property 'error'
-});
+})
 
 // log without meta
 logger.info('Info: Log from LogDNA-winston');
+
+// A payload without 'message' will log the stringified object as the message
+logger.info({
+  key: 'value'
+, text: 'This is some text to get logged'
+, bool: true
+})
 ```
 
 ## License
 
-MIT © [LogDNA](https://logdna.com/)
+Copyright © [LogDNA](https://logdna.com), released under an MIT license.
+See the [LICENSE](./LICENSE) file and https://opensource.org/licenses/MIT
 
 *Happy Logging!*
