@@ -4,7 +4,7 @@
   "description": "LogDNA's Node.js logging module with support for Winston",
   "main": "index.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint -c .eslintrc *.js"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -30,11 +30,24 @@
   },
   "homepage": "https://github.com/logdna/logdna-winston#readme",
   "dependencies": {
-    "logdna": "^3.5.0",
-    "winston": "^3.2.1"
+    "logdna": "^3.5.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.8.0"
+    "eslint": "^7.10.0",
+    "eslint-config-logdna": "^2.0.0",
+    "winston-transport": "^4.4.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "logdna"
+    ],
+    "root": true,
+    "ignorePatterns": [
+      "node_modules/",
+      "coverage/"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2019
+    }
   }
 }
