@@ -1,0 +1,6 @@
+# 2020-10-08, Version 3.0.0 (Stable)
+
+* [[1bba9a2b5e](https://github.com/logdna/logdna-winston/commit/1bba9a2b5e)] - **(SEMVER-MAJOR)** feat!: Change to use @logdna/logger as the client (Darin Spivey) [LOG-7378](https://logdna.atlassian.net/browse/LOG-7378)
+* [[468a43930c](https://github.com/logdna/logdna-winston/commit/468a43930c)] - bump: bump the package version to v2.3.2 (#20) (Samir Musali)
+* [[57d2bc5907](https://github.com/logdna/logdna-winston/commit/57d2bc5907)] - ci: Change to use Jenkins (Darin Spivey) [LOG-7378](https://logdna.atlassian.net/browse/LOG-7378)
+* [[cabd1e5fa2](https://github.com/logdna/logdna-winston/commit/cabd1e5fa2)] - deps: eslint-config-logdna@2.0.0 (Darin Spivey) [LOG-7378](https://logdna.atlassian.net/browse/LOG-7378)
