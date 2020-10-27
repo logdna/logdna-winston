@@ -1,3 +1,7 @@
+# 2020-10-27, Version 3.0.1 (Stable)
+
+* [[fe8b166d89](https://github.com/logdna/logdna-winston/commit/fe8b166d89)] - fix: add PR source validation to Jenkinsfile (Mike Del Tito) [LOG-7713](https://logdna.atlassian.net/browse/LOG-7713)
+
 # 2020-10-08, Version 3.0.0 (Stable)
 
 * [[1bba9a2b5e](https://github.com/logdna/logdna-winston/commit/1bba9a2b5e)] - **(SEMVER-MAJOR)** feat!: Change to use @logdna/logger as the client (Darin Spivey) [LOG-7378](https://logdna.atlassian.net/browse/LOG-7378)
