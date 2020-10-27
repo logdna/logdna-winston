@@ -103,6 +103,7 @@ pipeline {
       agent {
         docker {
           image "us.gcr.io/logdna-k8s/node:12-ci"
+          customWorkspace "${PROJECT_NAME}-${BUILD_NUMBER}"
         }
       }
 
@@ -134,6 +135,7 @@ pipeline {
       agent {
         docker {
           image "us.gcr.io/logdna-k8s/node:12-ci"
+          customWorkspace "${PROJECT_NAME}-${BUILD_NUMBER}"
         }
       }
 
