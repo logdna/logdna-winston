@@ -1,3 +1,7 @@
+# 2020-10-28, Version 3.0.2 (Stable)
+
+* [[29f225ac1d](https://github.com/logdna/logdna-winston/commit/29f225ac1d)] - deps: @logdna/logger@2.0.0 (Darin Spivey)
+
 # 2020-10-27, Version 3.0.1 (Stable)
 
 * [[fe8b166d89](https://github.com/logdna/logdna-winston/commit/fe8b166d89)] - fix: add PR source validation to Jenkinsfile (Mike Del Tito) [LOG-7713](https://logdna.atlassian.net/browse/LOG-7713)
