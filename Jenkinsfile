@@ -58,9 +58,7 @@ pipeline {
                 npm.auth token: "${GITHUB_PACKAGES_TOKEN}"
               }
 
-              sh """
-              npm install
-              """
+              sh 'npm install'
             }
           }
 
@@ -73,9 +71,7 @@ pipeline {
 
             post {
               always {
-                sh 'cat .tap-output | ./node_modules/.bin/tap-mocha-reporter xunit > coverage/test.xml'
-
-                junit 'coverage/test.xml'
+                junit checksName: 'Test Results', testResults: 'coverage/*.xml'
 
                 publishHTML target: [
                   allowMissing: false,
