@@ -1,3 +1,7 @@
+# 2020-12-16, Version 3.0.3 (Stable)
+
+* [[c5123aa947](https://github.com/logdna/logdna-winston/commit/c5123aa947)] - fix(ci): Expose linter results in the junit output (Darin Spivey)
+
 # 2020-10-28, Version 3.0.2 (Stable)
 
 * [[29f225ac1d](https://github.com/logdna/logdna-winston/commit/29f225ac1d)] - deps: @logdna/logger@2.0.0 (Darin Spivey)
