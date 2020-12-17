@@ -11,6 +11,7 @@ const levelTranslate = new Map([
 , ['info', 'info']
 , ['http', 'debug']
 , ['verbose', 'debug']
+, ['debug', 'debug']
 , ['silly', 'trace']
 ])
 /*
@@ -28,19 +29,21 @@ module.exports = class LogDNATransport extends Transport {
   }
 
   log(info, callback) {
+    const level = levelTranslate.get(info.level)
+
     if (info.error instanceof Error) {
       info.error = info.error.stack || info.error.toString()
     }
 
     if (!info.message) {
       // Send the incoming object payload as the message
-      const level = levelTranslate.get(info.level)
       this.logger.log(info, level)
       callback(null, true)
       return
     }
 
-    const {level, message, indexMeta, timestamp, ...meta} = info
+    // eslint-disable-next-line no-unused-vars
+    const {level: _, message, indexMeta, timestamp, ...meta} = info
     const opts = {
       level
     , indexMeta
