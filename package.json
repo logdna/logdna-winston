@@ -1,12 +1,11 @@
 {
   "name": "logdna-winston",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "LogDNA's Node.js logging module with support for Winston",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "tap"
+    "test": "tools/test.sh"
   },
   "repository": {
     "type": "git",
@@ -40,6 +39,7 @@
     "eslint-config-logdna": "^2.0.0",
     "nock": "^13.0.4",
     "tap": "^14.10.8",
+    "tap-xunit": "^2.4.1",
     "winston": "^3.3.3"
   },
   "eslintConfig": {
@@ -76,6 +76,6 @@
     "files": [
       "test/**/*.js"
     ],
-    "output-file": ".tap-output"
+    "output-file": "coverage/.tap-output"
   }
 }
