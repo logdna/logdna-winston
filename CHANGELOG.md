@@ -1,3 +1,7 @@
+# 2020-12-17, Version 3.0.4 (Stable)
+
+* [[7be3610c3b](https://github.com/logdna/logdna-winston/commit/7be3610c3b)] - Always translate the log level. (Mario Casciaro)
+
 # 2020-12-16, Version 3.0.3 (Stable)
 
 * [[c5123aa947](https://github.com/logdna/logdna-winston/commit/c5123aa947)] - fix(ci): Expose linter results in the junit output (Darin Spivey)
