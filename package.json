@@ -3,6 +3,11 @@
   "version": "3.0.4",
   "description": "LogDNA's Node.js logging module with support for Winston",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "lint": "eslint .",
     "test": "tools/test.sh",
@@ -10,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/logdna/logdna-winston.git"
+    "url": "git+ssh://git@github.com/logdna/logdna-winston.git"
   },
   "keywords": [
     "logdna",
@@ -26,7 +31,7 @@
     "name": "LogDNA Inc.",
     "email": "help@logdna.com"
   },
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "bugs": {
     "url": "https://github.com/logdna/logdna-winston/issues"
   },
