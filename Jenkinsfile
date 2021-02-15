@@ -3,9 +3,16 @@ library 'magic-butler-catalogue'
 def PROJECT_NAME = "logdna-winston"
 def REPO = "logdna/${PROJECT_NAME}"
 def TRIGGER_PATTERN = ".*@logdnabot.*"
+def CURRENT_BRANCH = [env.CHANGE_BRANCH, env.BRANCH_NAME]?.find{branch -> branch != null}
+def DEFAULT_BRANCH = 'main'
 
 pipeline {
   agent none
+
+  options {
+    timestamps()
+    ansiColor 'xterm'
+  }
 
   triggers {
     issueCommentTrigger(TRIGGER_PATTERN)
@@ -29,7 +36,7 @@ pipeline {
         axes {
           axis {
             name 'NODE_VERSION'
-            values '10', '12', '14'
+            values '12', '14', '15'
           }
         }
 
@@ -46,27 +53,11 @@ pipeline {
         }
 
         stages {
-          stage('Install') {
-            environment {
-              GITHUB_PACKAGES_TOKEN = credentials('github-api-token')
-            }
-
-            steps {
-              sh 'mkdir -p .npm'
-
-              script {
-                npm.auth token: "${GITHUB_PACKAGES_TOKEN}"
-              }
-
-              sh 'npm install'
-            }
-          }
-
           stage('Test') {
             steps {
-              sh 'node -v'
-              sh 'npm -v'
-              sh 'npm test'
+              sh 'mkdir -p .npm coverage'
+              sh 'npm install'
+              sh 'npm run test'
             }
 
             post {
@@ -92,7 +83,7 @@ pipeline {
       when {
         beforeAgent true
         not {
-          branch 'master'
+          branch DEFAULT_BRANCH
         }
       }
 
@@ -107,25 +98,24 @@ pipeline {
         NPM_CONFIG_CACHE = '.npm'
         NPM_CONFIG_USERCONFIG = '.npm/rc'
         SPAWN_WRAP_SHIM_ROOT = '.npm'
-        GITHUB_PACKAGES_TOKEN = credentials('github-api-token')
+        GITHUB_TOKEN = credentials('github-api-token')
+        NPM_TOKEN = credentials('npm-publish-token')
+        GIT_BRANCH = "${CURRENT_BRANCH}"
+        BRANCH_NAME = "${CURRENT_BRANCH}"
+        CHANGE_ID = ""
       }
 
       steps {
         sh 'mkdir -p .npm'
-
-        versioner(
-          token: "${GITHUB_PACKAGES_TOKEN}"
-        , dry: true
-        , repo: REPO
-        , branch: "master"
-        )
+        sh 'npm install'
+        sh "npm run release -- --dry-run --no-ci --branches ${CURRENT_BRANCH}"
       }
     }
 
     stage('Release') {
       when {
         beforeAgent true
-        branch 'master'
+        branch DEFAULT_BRANCH
       }
 
       agent {
@@ -136,25 +126,21 @@ pipeline {
       }
 
       environment {
-        GITHUB_PACKAGES_TOKEN = credentials('github-api-token')
-        NPM_PUBLISH_TOKEN = credentials('npm-publish-token')
+        GITHUB_TOKEN = credentials('github-api-token')
+        NPM_TOKEN = credentials('npm-publish-token')
         NPM_CONFIG_CACHE = '.npm'
         NPM_CONFIG_USERCONFIG = '.npm/rc'
         SPAWN_WRAP_SHIM_ROOT = '.npm'
+        GIT_AUTHOR_NAME = 'LogDNA Bot'
+        GIT_AUTHOR_EMAIL = 'bot@logdna.com'
+        GIT_COMMITTER_NAME = 'LogDNA Bot'
+        GIT_COMMITTER_EMAIL = 'bot@logdna.com'
       }
 
       steps {
         sh 'mkdir -p .npm'
-
-        sh "git checkout -b ${GIT_BRANCH} origin/${GIT_BRANCH}"
-
-        versioner(
-          token: "${GITHUB_PACKAGES_TOKEN}"
-        , dry: false
-        , repo: REPO
-        , NPM_PUBLISH_TOKEN: "${NPM_PUBLISH_TOKEN}"
-        , branch: "master"
-        )
+        sh 'npm install'
+        sh 'npm run release'
       }
     }
   }
