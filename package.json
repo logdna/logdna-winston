@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "tools/test.sh"
+    "test": "tools/test.sh",
+    "release": "semantic-release"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,8 @@
     "eslint": "^7.20.0",
     "eslint-config-logdna": "^4.0.2",
     "nock": "^13.0.4",
+    "semantic-release": "^17.3.9",
+    "semantic-release-config-logdna": "^1.1.0",
     "tap": "^14.10.8",
     "tap-xunit": "^2.4.1",
     "winston": "^3.3.3"
@@ -61,9 +64,11 @@
     "ts": false,
     "jsx": false,
     "check-coverage": true,
+    "browser": false,
     "coverage-report": [
       "text",
       "text-summary",
+      "json-summary",
       "json",
       "html"
     ],
@@ -77,5 +82,11 @@
       "test/**/*.js"
     ],
     "output-file": "coverage/.tap-output"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "extends": "semantic-release-config-logdna"
   }
 }
