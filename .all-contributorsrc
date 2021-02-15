@@ -58,6 +58,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "mariocasciaro",
+      "name": "Mario Casciaro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/105319?v=4",
+      "profile": "https://github.com/mariocasciaro",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
