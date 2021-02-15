@@ -35,8 +35,8 @@
     "winston-transport": "^4.4.0"
   },
   "devDependencies": {
-    "eslint": "^7.10.0",
-    "eslint-config-logdna": "^2.0.0",
+    "eslint": "^7.20.0",
+    "eslint-config-logdna": "^4.0.2",
     "nock": "^13.0.4",
     "tap": "^14.10.8",
     "tap-xunit": "^2.4.1",

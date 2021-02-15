@@ -1,8 +1,8 @@
 'use strict'
 
-const pkg = require('./package.json')
 const Transport = require('winston-transport')
 const {createLogger} = require('@logdna/logger')
+const pkg = require('./package.json')
 
 // Convert between Winston levels and @logdna/logger levels
 const levelTranslate = new Map([

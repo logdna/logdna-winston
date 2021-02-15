@@ -1,9 +1,9 @@
 'use strict'
 
-const logdnaWinston = require('../index.js')
 const {test} = require('tap')
 const nock = require('nock')
 const winston = require('winston')
+const logdnaWinston = require('../index.js')
 
 nock.disableNetConnect()
 
