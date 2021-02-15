@@ -76,6 +76,16 @@
       "contributions": [
         "tool"
       ]
+    },
+    {
+      "login": "mdeltito",
+      "name": "Mike Del Tito",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69520?v=4",
+      "profile": "https://github.com/mdeltito",
+      "contributions": [
+        "code",
+        "tool"
+      ]
     }
   ],
   "contributorsPerLine": 7

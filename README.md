@@ -7,6 +7,10 @@
 
 ---
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 * **[Install](#install)**
 * **[API](#api)**
 * **[Winston Transport](#winston-transport)**
@@ -68,6 +72,36 @@ logger.info({
 , bool: true
 })
 ```
+
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/respectus"><img src="https://avatars.githubusercontent.com/u/1046364?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Muaz Siddiqui</b></sub></a><br /><a href="https://github.com/logdna/logdna-winston/commits?author=respectus" title="Code">💻</a> <a href="https://github.com/logdna/logdna-winston/commits?author=respectus" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/smusali"><img src="https://avatars.githubusercontent.com/u/34287490?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Samir Musali</b></sub></a><br /><a href="https://github.com/logdna/logdna-winston/commits?author=smusali" title="Code">💻</a> <a href="https://github.com/logdna/logdna-winston/commits?author=smusali" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/darinspivey"><img src="https://avatars.githubusercontent.com/u/1874788?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Darin Spivey</b></sub></a><br /><a href="https://github.com/logdna/logdna-winston/commits?author=darinspivey" title="Code">💻</a> <a href="https://github.com/logdna/logdna-winston/commits?author=darinspivey" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/LYHuang"><img src="https://avatars.githubusercontent.com/u/14082239?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mike Huang</b></sub></a><br /><a href="https://github.com/logdna/logdna-winston/commits?author=LYHuang" title="Code">💻</a> <a href="https://github.com/logdna/logdna-winston/commits?author=LYHuang" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://theconnman.com/"><img src="https://avatars.githubusercontent.com/u/1328448?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Brian Conn</b></sub></a><br /><a href="https://github.com/logdna/logdna-winston/commits?author=TheConnMan" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/mariocasciaro"><img src="https://avatars.githubusercontent.com/u/105319?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mario Casciaro</b></sub></a><br /><a href="https://github.com/logdna/logdna-winston/commits?author=mariocasciaro" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/vilyapilya"><img src="https://avatars.githubusercontent.com/u/17367511?v=4?s=100" width="100px;" alt=""/><br /><sub><b>vilyapilya</b></sub></a><br /><a href="#tool-vilyapilya" title="Tools">🔧</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/mdeltito"><img src="https://avatars.githubusercontent.com/u/69520?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mike Del Tito</b></sub></a><br /><a href="https://github.com/logdna/logdna-winston/commits?author=mdeltito" title="Code">💻</a> <a href="#tool-mdeltito" title="Tools">🔧</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## License
 
