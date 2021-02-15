@@ -57,7 +57,7 @@ pipeline {
             steps {
               sh 'mkdir -p .npm coverage'
               sh 'npm install'
-              sh 'npm run test'
+              sh 'npm test'
             }
 
             post {
