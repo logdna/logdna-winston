@@ -49,6 +49,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "TheConnMan",
+      "name": "Brian Conn",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1328448?v=4",
+      "profile": "http://theconnman.com/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
