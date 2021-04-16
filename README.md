@@ -46,35 +46,23 @@ const options = {
     level: level, // Default to debug, maximum level of log, doc: https://github.com/winstonjs/winston#logging-levels
     indexMeta: true // Defaults to false, when true ensures meta object will be searchable
 }
-
 // Only add this line in order to track exceptions
 options.handleExceptions = true;
-
 logger.add(new logdnaWinston(options))
-
 // Log Examples
-
-// log with meta and human-readable message for Live Tail (structure upon logline expansion in-app)
+// log with meta and human readable message for Live Tail (structure upon log line expansion in-app)
 let log_obj_info = {
     message: 'USER 101010 SUCCESSFUL LOGIN',
     user_id: '101010',
     trace_id: '163e169e-a326-4b1b-a8f5-7169dd4eeca8',
 }
-logger.log({          
-    message: JSON.stringify(log_obj_info), // Optional. If not provided, the stringified (read JSON) object in its entirety will be sent as the payload
-                                           // If specified, message will be the body/payload while the other parameters are as follows in this case
-    level: 'info',                         //       Required.
-    indexMeta: true,                       //       Optional. If not provided, it will use the default.
-    geoloc: {lat:37.386,lon:-122.084}      //       Optional. Properties besides level, message and indexMeta are considered as "meta"
+logger.log({      
+    level: 'info',                         // Required.     
+    message: JSON.stringify(log_obj_info), // Optional. If not provided, the stringified (read JSON) object (minus level) will be sent as the payload
+                                           //           If specified, message will be the body/payload while the other parameters are then
+    indexMeta: true,                       //               Optional. If not provided, it will use the default.
+    geoloc: {lat:37.386,lon:-122.084}      //               Optional. Properties besides level, message and indexMeta are up to you and considered "meta"
 })
-
-// a payload without 'message' will log the stringified (read JSON) object as the message
-logger.info({
-    key: 'value',
-    text: 'This is some text to get logged',
-    bool: true
-})
-
 // log errors with structure and the proper level
 try {
     throw new Error("It's a trap!");
@@ -88,9 +76,14 @@ try {
         } // no meta included this time
     })
 }
-
 // log with convenience functions
 logger.info('Info: Log from LogDNA-winston')
+// a payload without 'message' will log the stringified (read JSON) object as the message.  Same functionality as logger.log minus the level bit
+logger.warn({
+    key: 'value',
+    text: 'This is some text to get logged',
+    bool: true
+})
 ```
 
 
