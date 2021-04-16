@@ -61,7 +61,7 @@ let log_obj_info = {
     trace_id: '163e169e-a326-4b1b-a8f5-7169dd4eeca8',
 }
 logger.log({          
-    message: JSON.stringify(log_obj_info), // Optional. If not provided, the stringified (read JSON) object in it's entirety will be sent as the payload
+    message: JSON.stringify(log_obj_info), // Optional. If not provided, the stringified (read JSON) object in its entirety will be sent as the payload
                                            // If specified, message will be the body/payload while the other parameters are as follows in this case
     level: 'info',                         //       Required.
     indexMeta: true,                       //       Optional. If not provided, it will use the default.
