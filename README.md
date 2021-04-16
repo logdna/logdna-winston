@@ -50,7 +50,7 @@ const options = {
 options.handleExceptions = true;
 logger.add(new logdnaWinston(options))
 // Log Examples
-// log with meta and human readable message for Live Tail (structure upon log line expansion in-app)
+// log with meta and human-readable message for Live Tail (structure upon log line expansion in-app)
 let log_obj_info = {
     message: 'USER 101010 SUCCESSFUL LOGIN',
     user_id: '101010',
