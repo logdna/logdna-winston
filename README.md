@@ -30,7 +30,7 @@ instantiation options to passthrough to LogDNA's logger client.
 
 ## Winston Transport
 
-This module also provides a transport object, which can be added to winston using:
+This module also provides a transport object, which can be added to Winston using:
 
 ```javascript
 const logdnaWinston = require('logdna-winston');
@@ -54,14 +54,14 @@ logger.add(new logdnaWinston(options))
 
 // Log Examples
 
-// log with meta and human readable message for Live Tail (structure upon logline expansion in-app)
+// log with meta and human-readable message for Live Tail (structure upon logline expansion in-app)
 let log_obj_info = {
     message: 'USER 101010 SUCCESSFUL LOGIN',
     user_id: '101010',
     trace_id: '163e169e-a326-4b1b-a8f5-7169dd4eeca8',
 }
 logger.log({          
-    message: JSON.stringify(log_obj_info), // Optional. If not provided, the stringified (read JSON) object in it's entirety will be sent as the payload
+    message: JSON.stringify(log_obj_info), // Optional. If not provided, the stringified (read JSON) object in its entirety will be sent as the payload
                                            // If specified, message will be the body/payload while the other parameters are as follows in this case
     level: 'info',                         //       Required.
     indexMeta: true,                       //       Optional. If not provided, it will use the default.
