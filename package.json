@@ -1,14 +1,21 @@
 {
   "name": "logdna-winston",
-  "version": "2.3.1",
+  "version": "3.0.5",
   "description": "LogDNA's Node.js logging module with support for Winston",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "lint": "./node_modules/.bin/eslint -c .eslintrc *.js"
+    "lint": "eslint .",
+    "test": "tools/test.sh",
+    "release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/logdna/logdna-winston.git"
+    "url": "git+ssh://git@github.com/logdna/logdna-winston.git"
   },
   "keywords": [
     "logdna",
@@ -24,17 +31,67 @@
     "name": "LogDNA Inc.",
     "email": "help@logdna.com"
   },
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "bugs": {
     "url": "https://github.com/logdna/logdna-winston/issues"
   },
   "homepage": "https://github.com/logdna/logdna-winston#readme",
   "dependencies": {
-    "logdna": "^3.5.0",
-    "winston": "^3.2.1"
+    "@logdna/logger": "^2.2.4",
+    "winston-transport": "^4.4.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.5.1"
+    "eslint": "^7.20.0",
+    "eslint-config-logdna": "^4.0.2",
+    "nock": "^13.0.4",
+    "semantic-release": "^17.3.9",
+    "semantic-release-config-logdna": "^1.1.0",
+    "tap": "^14.10.8",
+    "tap-xunit": "^2.4.1",
+    "winston": "^3.3.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "logdna"
+    ],
+    "root": true,
+    "ignorePatterns": [
+      "node_modules/",
+      "coverage/"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2019
+    }
+  },
+  "tap": {
+    "100": true,
+    "esm": false,
+    "ts": false,
+    "jsx": false,
+    "check-coverage": true,
+    "browser": false,
+    "coverage-report": [
+      "text",
+      "text-summary",
+      "json-summary",
+      "json",
+      "html"
+    ],
+    "reporter": "tap",
+    "nyc-arg": [
+      "--exclude=test/",
+      "--exclude=tools",
+      "--all"
+    ],
+    "files": [
+      "test/**/*.js"
+    ],
+    "output-file": "coverage/.tap-output"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "extends": "semantic-release-config-logdna"
   }
 }

@@ -1,0 +1,92 @@
+{
+  "projectName": "logdna-winston",
+  "projectOwner": "logdna",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "respectus",
+      "name": "Muaz Siddiqui",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1046364?v=4",
+      "profile": "https://github.com/respectus",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "smusali",
+      "name": "Samir Musali",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34287490?v=4",
+      "profile": "https://github.com/smusali",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "darinspivey",
+      "name": "Darin Spivey",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1874788?v=4",
+      "profile": "https://github.com/darinspivey",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "LYHuang",
+      "name": "Mike Huang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14082239?v=4",
+      "profile": "https://github.com/LYHuang",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "TheConnMan",
+      "name": "Brian Conn",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1328448?v=4",
+      "profile": "http://theconnman.com/",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "mariocasciaro",
+      "name": "Mario Casciaro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/105319?v=4",
+      "profile": "https://github.com/mariocasciaro",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "vilyapilya",
+      "name": "vilyapilya",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17367511?v=4",
+      "profile": "https://github.com/vilyapilya",
+      "contributions": [
+        "tool"
+      ]
+    },
+    {
+      "login": "mdeltito",
+      "name": "Mike Del Tito",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69520?v=4",
+      "profile": "https://github.com/mdeltito",
+      "contributions": [
+        "code",
+        "tool"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
