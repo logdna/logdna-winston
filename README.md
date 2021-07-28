@@ -50,26 +50,47 @@ const options = {
 // Only add this line in order to track exceptions
 options.handleExceptions = true;
 
-logger.add(new logdnaWinston(options));
+logger.add(new logdnaWinston(options))
 
+// Log Examples
 
-// log with meta
-logger.log({
-    level: 'info'
-    , message: 'Log from LogDNA-winston'
-    , indexMeta: true // Optional.  If not provided, it will use the default.
-    , data:'Some information' //  Properties besides level, message and indexMeta are considered as "meta"
-    , error: new Error("It's a trap.") // Transport will parse the error object under property 'error'
+// log with meta and human readable message for Live Tail (structure upon log line expansion in-app)
+let log_obj_info = {
+    message: 'USER 101010 SUCCESSFUL LOGIN',
+    user_id: '101010',
+    trace_id: '163e169e-a326-4b1b-a8f5-7169dd4eeca8',
+}
+logger.log({      
+    level: 'info',                         // Required.     
+    message: JSON.stringify(log_obj_info), // Optional. If not provided, the stringified (read JSON) object (minus level) will be sent as the payload
+                                           //           If specified, message will be the body/payload while the other parameters are then
+    indexMeta: true,                       //               Optional. If not provided, it will use the default.
+    geoloc: {lat:37.386,lon:-122.084}      //               Optional. Properties besides level, message and indexMeta are up to you
+                                           //                         and stored in the "meta" field
 })
 
-// log without meta
-logger.info('Info: Log from LogDNA-winston');
+// log errors with structure and the proper level
+try {
+    throw new Error("It's a trap!");
+} catch(e) {
+    logger.log({
+        level: 'error',
+        message: { // Quickly break out the important error information into searchable fields within LogDNA via JSON 
+            message:e.message,
+            error:{code:e.code,stack:e.stack},        
+            trace_id: 'a077f0ad-ed0f-423b-b8d8-e0f9e3165d9f'
+        } // no meta included this time
+    })
+}
 
-// A payload without 'message' will log the stringified object as the message
-logger.info({
-  key: 'value'
-, text: 'This is some text to get logged'
-, bool: true
+// log with convenience functions
+logger.info('Info: Log from LogDNA-winston')
+
+// a payload without 'message' will log the stringified (read JSON) object as the message.  Same functionality as logger.log minus the level bit
+logger.warn({
+    key: 'value',
+    text: 'This is some text to get logged',
+    bool: true
 })
 ```
 
