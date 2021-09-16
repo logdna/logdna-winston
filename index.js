@@ -4,16 +4,6 @@ const Transport = require('winston-transport')
 const {createLogger} = require('@logdna/logger')
 const pkg = require('./package.json')
 
-// Convert between Winston levels and @logdna/logger levels
-const levelTranslate = new Map([
-  ['error', 'error']
-, ['warn', 'warn']
-, ['info', 'info']
-, ['http', 'debug']
-, ['verbose', 'debug']
-, ['debug', 'debug']
-, ['silly', 'trace']
-])
 /*
  *  Support for Winston Transport
  */
@@ -29,7 +19,7 @@ module.exports = class LogDNATransport extends Transport {
   }
 
   log(info, callback) {
-    const level = levelTranslate.get(info.level)
+    const level = info.level
 
     if (info.error instanceof Error) {
       info.error = info.error.stack || info.error.toString()
