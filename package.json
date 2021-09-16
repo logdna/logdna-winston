@@ -41,7 +41,7 @@
     "winston-transport": "^4.4.0"
   },
   "devDependencies": {
-    "eslint": "^7.20.0",
+    "eslint": "^7.32.0",
     "eslint-config-logdna": "^4.0.2",
     "nock": "^13.0.4",
     "semantic-release": "^17.3.9",
