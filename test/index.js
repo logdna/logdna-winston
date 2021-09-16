@@ -38,7 +38,7 @@ test('Call .log() with an object and indexMeta: true', (t) => {
   nock(options.url)
     .post('/', (body) => {
       const payload = body.ls[0]
-      t.deepEqual(payload, {
+      t.same(payload, {
         timestamp
       , line: message
       , level: 'INFO'
@@ -259,7 +259,7 @@ test('Error will still be processed if there is no stack trace', (t) => {
   nock(options.url)
     .post('/', (body) => {
       const payload = body.ls[0]
-      t.deepEqual(payload, {
+      t.same(payload, {
         timestamp
       , line: error.message
       , level: 'ERROR'
