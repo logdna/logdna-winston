@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/logdna/logdna-winston#readme",
   "dependencies": {
-    "@logdna/logger": "^2.2.4",
+    "@logdna/logger": "^2.4.0",
     "winston-transport": "^4.4.0"
   },
   "devDependencies": {

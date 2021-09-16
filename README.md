@@ -55,11 +55,11 @@ logger.add(new logdnaWinston(options));
 
 // log with meta
 logger.log({
-    level: 'info'
-    , message: 'Log from LogDNA-winston'
-    , indexMeta: true // Optional.  If not provided, it will use the default.
-    , data:'Some information' //  Properties besides level, message and indexMeta are considered as "meta"
-    , error: new Error("It's a trap.") // Transport will parse the error object under property 'error'
+  level: 'info'
+, message: 'Log from LogDNA-winston'
+, indexMeta: true // Optional.  If not provided, it will use the default.
+, data:'Some information' //  Properties besides level, message and indexMetaare considered as "meta"
+, error: new Error("It's a trap.") // Transport will parse the error object under property 'error'
 })
 
 // log without meta
@@ -73,6 +73,42 @@ logger.info({
 })
 ```
 
+## Custom Log Levels
+
+As per the Winston documentation, [custom log levels](https://github.com/winstonjs/winston#using-custom-logging-levels) may be used. In order to use such
+levels in LogDNA, [custom levels must be defined](https://github.com/logdna/logger-node#custom-log-levels) for that logger as well.
+
+```javascript
+  const levels = {
+    error: 0
+  , warn: 1
+  , info: 2
+  , http: 3
+  , verbose: 4
+  , loquacious: 5
+  , ludicrous: 6
+  }
+  const logger = winston.createLogger({
+    levels
+  , level: 'ludicrous' // needed, or else it won't log levels <= to 'info'
+  })
+
+  const logdna_options = {
+    key: 'abc123'
+  , levels: Object.keys(levels)
+  }
+  logger.add(new logdnaWinston(logdna_options))
+
+  // Now the custom levels can be logged in Winston and LogDNA
+  logger.ludicrous('Some text')
+
+  logger.log({
+    msg: 'Custom level log message'
+  , key: 'value'
+  , bool: true
+  , level: 'loquacious'
+  })
+```
 
 ## Contributors ✨
 

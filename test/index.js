@@ -175,40 +175,52 @@ test('Call .log() with a message object', (t) => {
   logger.log(message)
 })
 
-test('Call .log() with a message payload and level to translate', (t) => {
-  const logger = winston.createLogger({
-    level: 'silly'
-  })
-  const message = {
-    msg: 'Log from LogDNA-winston'
-  , key: 'value'
-  , bool: true
-  , level: 'verbose'
+test('Call .log() with a message payload and custom level', (t) => {
+  const levels = {
+    error: 0
+  , warn: 1
+  , info: 2
+  , http: 3
+  , verbose: 4
+  , loquacious: 5
+  , ludicrous: 6
   }
-  const options = {
+  const logger = winston.createLogger({
+    levels
+  , level: 'ludicrous' // needed, or else it won't log levels <= to 'info'
+  })
+
+  const logdna_options = {
     key: 'abc123'
   , hostname: 'My-Host'
   , ip: '192.168.2.100'
   , mac: '9e:a0:f8:20:86:3d'
   , url: 'http://localhost:35870'
   , app: 'LogDNA'
+  , levels: Object.keys(levels)
   }
-
-  logger.add(new logdnaWinston(options))
+  logger.add(new logdnaWinston(logdna_options))
 
   t.plan(2)
   t.on('end', async () => {
     nock.cleanAll()
   })
 
-  nock(options.url)
+  const message = {
+    msg: 'Custom level log message'
+  , key: 'value'
+  , bool: true
+  , level: 'ludicrous'
+  }
+
+  nock(logdna_options.url)
     .post('/', (body) => {
       const payload = body.ls[0]
       t.match(payload, {
         timestamp: Number
       , line: JSON.stringify(message)
-      , level: 'DEBUG'
-      , app: options.app
+      , level: 'LUDICROUS'
+      , app: logdna_options.app
       , meta: '{}' // indexMeta is `false`, so it's stringified
       }, 'Options were successfully placed into the message')
       return true
@@ -225,7 +237,7 @@ test('Call .log() with a message payload and level to translate', (t) => {
     })
     .reply(200, 'Ingester response')
 
-  logger.log(message)
+  logger.ludicrous(message)
 })
 
 test('Error will still be processed if there is no stack trace', (t) => {
