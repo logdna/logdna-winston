@@ -1,5 +1,30 @@
 ## Changelog
 
+# [4.0.0](https://github.com/logdna/logdna-winston/compare/v3.0.5...v4.0.0) (2021-09-17)
+
+
+### Chores
+
+* **deps**: eslint-config-logdna@5.1.0 [1313046](https://github.com/logdna/logdna-winston/commit/1313046c9285294761c131c4ffe34f4e80c7194f) - Darin Spivey
+* **deps**: eslint@7.32.0 [12f2235](https://github.com/logdna/logdna-winston/commit/12f22352b8eab571de5006f2a76131ac4f8ffb20) - Darin Spivey
+* **deps**: semantic-release-config-logdna@1.3.0 [500705c](https://github.com/logdna/logdna-winston/commit/500705c2e6b9d3bc21be422684eefd2dd81fb9a1) - Darin Spivey
+* **deps**: semantic-release@17.4.7 [a6e4501](https://github.com/logdna/logdna-winston/commit/a6e450129e0a1eb44616fae4bb0d94f0771771e5) - Darin Spivey
+
+
+### Features
+
+* **levels**: Support custom log levels in LogDNA [02c6b3e](https://github.com/logdna/logdna-winston/commit/02c6b3e41260c72e4397ed45565dbc2072c17209) - Darin Spivey, closes: [#31](https://github.com/logdna/logdna-winston/issues/31)
+
+
+### **BREAKING CHANGES**
+
+* **levels:** This removes the log level "translation"
+that used to be in place to convert Winston levels to ones
+that would be acceptable by LogDNA. Since LogDNA can now
+define custom levels as well, this translation is no longer
+needed, however it may break implementations that are
+relying on the translated levels.
+
 ## [3.0.5](https://github.com/logdna/logdna-winston/compare/v3.0.4...v3.0.5) (2021-04-15)
 
 
