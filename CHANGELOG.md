@@ -1,5 +1,13 @@
 ## Changelog
 
+## [4.0.1](https://github.com/logdna/logdna-winston/compare/v4.0.0...v4.0.1) (2021-09-21)
+
+
+### Bug Fixes
+
+* **level**: Separate concerns for the "level" parameter [0f734d8](https://github.com/logdna/logdna-winston/commit/0f734d8ac9fc9652fe1201c00df555d5c03d861c) - Darin Spivey, closes: [#33](https://github.com/logdna/logdna-winston/issues/33)
+* **levels**: Automatically set up LogDNA custom levels for defaults [e3101e9](https://github.com/logdna/logdna-winston/commit/e3101e9d3fb3acd838803f30d7341a6fbca292ee) - Darin Spivey
+
 # [4.0.0](https://github.com/logdna/logdna-winston/compare/v3.0.5...v4.0.0) (2021-09-17)
 
 
