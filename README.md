@@ -76,7 +76,12 @@ logger.info({
 ## Custom Log Levels
 
 As per the Winston documentation, [custom log levels](https://github.com/winstonjs/winston#using-custom-logging-levels) may be used. In order to use such
-levels in LogDNA, [custom levels must be defined](https://github.com/logdna/logger-node#custom-log-levels) for that logger as well.
+levels in LogDNA, [custom levels must be defined](https://github.com/logdna/logger-node#custom-log-levels) for that logger as well. If `levels` is passed to this transport, they
+will **automatically** be configured as custom levels for the LogDNA logger.
+
+Similarly, if no custom winston levels are used, then the Winston [default of "npm" levels](https://github.com/winstonjs/winston#logging-levels) will be automatically configured for LogDNA to understand. 
+
+**NOTE:** The "levels" parameter is in the context of Winston, thus it should be an object where the keys are the level names, and the values are a numeric priority.
 
 ```javascript
   const levels = {
@@ -95,7 +100,6 @@ levels in LogDNA, [custom levels must be defined](https://github.com/logdna/logg
 
   const logdna_options = {
     key: 'abc123'
-  , levels: Object.keys(levels)
   }
   logger.add(new logdnaWinston(logdna_options))
 

@@ -9,11 +9,31 @@ const pkg = require('./package.json')
  */
 module.exports = class LogDNATransport extends Transport {
   constructor(options) {
-    super(options)
+    const {levels, ...opts} = options
+    super({
+      ...opts
+    , levels
+    })
 
+    let custom_levels = levels
+    if (!custom_levels) {
+      // Per the winston docs, their 'npm' levels will be used, and those must be
+      // set up as custom levels in LogDNA.
+      // @see https://github.com/winstonjs/winston#logging-levels
+      custom_levels = {
+        error: 0
+      , warn: 1
+      , info: 2
+      , http: 3
+      , verbose: 4
+      , debug: 5
+      , silly: 6
+      }
+    }
     // Create an instance of @logdna/logger
     this.logger = createLogger(options.key, {
-      ...options
+      ...opts
+    , levels: Object.keys(custom_levels)
     , UserAgent: `${pkg.name}/${pkg.version}`
     })
   }
