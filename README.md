@@ -114,6 +114,38 @@ Similarly, if no custom winston levels are used, then the Winston [default of "n
   })
 ```
 
+## The `maxLevel` Parameter
+
+Both the Winston logger and the LogDNA logger accept a `level` parameter, but they mean different things:
+
+* For Winston, `level` represents the maximum log level by priority. In other words, anything "higher" in priority number WILL NOT be logged.
+* In LogDNA, `level` represents a default log level which is used in the absence of a level being defined for each log entry. Since Winston always passed a log level, this parameter is not usable in this transport.
+
+To disambiguate the two `level` parameters (even though the LogDNA one cannot be used), this custom transport will accept the `maxLevel` parameter to be used as Winston's `level` parameter. This is **only needed if** `level` has not been defined during Winston's `createLogger` call prior to adding this custom transport.
+
+```js
+const winston = require('winston')
+const logdnaTransport = require('logdna-winston')
+
+const logger = winston.createLogger({
+  level: 'verbose'
+, transports:[new logdnaTransport({key: 'abc123'})]
+})
+logger.silly('This will not be logged')
+logger.verbose('This will be logged')
+
+// ...is the same as this
+ const logger = winston.createLogger({
+  transports:[
+    new logdnaTransport({
+      key: 'abc123'
+    , maxLevel: 'verbose'
+    })
+  ]
+})
+logger.silly('This will not be logged')
+logger.verbose('This will be logged')
+```
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
