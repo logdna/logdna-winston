@@ -197,7 +197,7 @@ test('Call .log() with a message payload and custom level', (t) => {
   , mac: '9e:a0:f8:20:86:3d'
   , url: 'http://localhost:35870'
   , app: 'LogDNA'
-  , levels: Object.keys(levels)
+  , levels
   }
   logger.add(new logdnaWinston(logdna_options))
 
@@ -302,4 +302,50 @@ test('Error will still be processed if there is no stack trace', (t) => {
   , indexMeta: true
   , error
   })
+})
+
+test('If no "levels", then use winston defaults and pass LogDNA custom levels', (t) => {
+  const logger = winston.createLogger()
+
+  const logdna_options = {
+    key: 'abc123'
+  , hostname: 'My-Host'
+  , ip: '192.168.2.100'
+  , mac: '9e:a0:f8:20:86:3d'
+  , url: 'http://localhost:35870'
+  , app: 'LogDNA'
+  , level: 'silly' // Required for this test since 'info' is the max log level by default
+  }
+  logger.add(new logdnaWinston(logdna_options))
+
+  t.plan(4)
+  t.on('end', async () => {
+    nock.cleanAll()
+  })
+
+  nock(logdna_options.url)
+    .post('/', (body) => {
+      for (const {level} of body.ls) {
+        switch (level) {
+          case 'ERROR':
+          case 'INFO':
+          case 'VERBOSE':
+          case 'SILLY':
+            t.pass(`${level} level received`)
+            continue
+          default:
+            t.fail(`${level} is not configured for this test`)
+        }
+      }
+      return true
+    })
+    .query(() => {
+      return true
+    })
+    .reply(200, 'Ingester response')
+
+  logger.error('This is an error')
+  logger.info('This is an info')
+  logger.verbose('This is verbose, which is supported via LogDNA custom levels')
+  logger.silly('This is silly, which is supported via LogDNA custom levels')
 })
