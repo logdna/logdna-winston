@@ -314,7 +314,7 @@ test('If no "levels", then use winston defaults and pass LogDNA custom levels', 
   , mac: '9e:a0:f8:20:86:3d'
   , url: 'http://localhost:35870'
   , app: 'LogDNA'
-  , level: 'silly' // Required for this test since 'info' is the max log level by default
+  , maxLevel: 'silly' // Required for this test since 'info' is the max log level by default
   }
   logger.add(new logdnaWinston(logdna_options))
 
@@ -348,4 +348,48 @@ test('If no "levels", then use winston defaults and pass LogDNA custom levels', 
   logger.info('This is an info')
   logger.verbose('This is verbose, which is supported via LogDNA custom levels')
   logger.silly('This is silly, which is supported via LogDNA custom levels')
+})
+
+test('Winston is passed "level" when the "maxLevel" param is used', (t) => {
+  const logger = winston.createLogger()
+
+  const logdna_options = {
+    key: 'abc123'
+  , hostname: 'My-Host'
+  , ip: '192.168.2.100'
+  , mac: '9e:a0:f8:20:86:3d'
+  , url: 'http://localhost:35870'
+  , app: 'LogDNA'
+  , maxLevel: 'warn'
+  }
+  logger.add(new logdnaWinston(logdna_options))
+
+  t.plan(2)
+  t.on('end', async () => {
+    nock.cleanAll()
+  })
+
+  nock(logdna_options.url)
+    .post('/', (body) => {
+      for (const {level} of body.ls) {
+        switch (level) {
+          case 'ERROR':
+          case 'WARN':
+            t.pass(`${level} level received`)
+            continue
+          default:
+            t.fail(`${level} is not configured for this test`)
+        }
+      }
+      return true
+    })
+    .query(() => {
+      return true
+    })
+    .reply(200, 'Ingester response')
+
+  logger.error('This error will be logged')
+  logger.warn('This warning will be logged')
+  logger.info('This is an info, but will be ignored due to maxLevel')
+  logger.verbose('This is verbose, but will be ignored due to maxLevel')
 })

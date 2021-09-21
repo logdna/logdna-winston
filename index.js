@@ -9,10 +9,11 @@ const pkg = require('./package.json')
  */
 module.exports = class LogDNATransport extends Transport {
   constructor(options) {
-    const {levels, ...opts} = options
+    const {levels, maxLevel, key, ...opts} = options
     super({
       ...opts
     , levels
+    , level: maxLevel
     })
 
     let custom_levels = levels
@@ -31,7 +32,7 @@ module.exports = class LogDNATransport extends Transport {
       }
     }
     // Create an instance of @logdna/logger
-    this.logger = createLogger(options.key, {
+    this.logger = createLogger(key, {
       ...opts
     , levels: Object.keys(custom_levels)
     , UserAgent: `${pkg.name}/${pkg.version}`
