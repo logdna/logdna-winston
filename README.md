@@ -33,37 +33,35 @@ instantiation options to passthrough to LogDNA's logger client.
 This module also provides a transport object, which can be added to winston using:
 
 ```javascript
-const logdnaWinston = require('logdna-winston');
-const winston = require('winston');
-const logger = winston.createLogger({});
+const winston = require('winston')
+const logdnaTransport = require('logdna-winston')
+const logger = winston.createLogger({})
 const options = {
-    key: apikey,
-    hostname: myHostname,
-    ip: ipAddress,
-    mac: macAddress,
-    app: appName,
-    env: envName,
-    level: level, // Default to debug, maximum level of log, doc: https://github.com/winstonjs/winston#logging-levels
-    indexMeta: true // Defaults to false, when true ensures meta object will be searchable
+  key: apikey
+, hostname: myHostname
+, ip: ipAddress
+, mac: macAddress
+, app: appName
+, env: envName
+, level: level // Default to debug, maximum level of log, doc: https://github.com/winstonjs/winston#logging-levels
+, indexMeta: true // Defaults to false, when true ensures meta object will be searchable
 }
 
 // Only add this line in order to track exceptions
-options.handleExceptions = true;
-
-logger.add(new logdnaWinston(options));
-
+options.handleExceptions = true
+logger.add(new logdnaTransport(options))
 
 // log with meta
 logger.log({
   level: 'info'
 , message: 'Log from LogDNA-winston'
 , indexMeta: true // Optional.  If not provided, it will use the default.
-, data:'Some information' //  Properties besides level, message and indexMetaare considered as "meta"
+, data: 'Some information' //  Properties besides level, message and indexMeta are considered as "meta"
 , error: new Error("It's a trap.") // Transport will parse the error object under property 'error'
 })
 
 // log without meta
-logger.info('Info: Log from LogDNA-winston');
+logger.info('Info: Log from LogDNA-winston')
 
 // A payload without 'message' will log the stringified object as the message
 logger.info({
@@ -84,34 +82,34 @@ Similarly, if no custom winston levels are used, then the Winston [default of "n
 **NOTE:** The "levels" parameter is in the context of Winston, thus it should be an object where the keys are the level names, and the values are a numeric priority.
 
 ```javascript
-  const levels = {
-    error: 0
-  , warn: 1
-  , info: 2
-  , http: 3
-  , verbose: 4
-  , loquacious: 5
-  , ludicrous: 6
-  }
-  const logger = winston.createLogger({
-    levels
-  , level: 'ludicrous' // needed, or else it won't log levels <= to 'info'
-  })
+const levels = {
+  error: 0
+, warn: 1
+, info: 2
+, http: 3
+, verbose: 4
+, loquacious: 5
+, ludicrous: 6
+}
+const logger = winston.createLogger({
+  levels
+, level: 'ludicrous' // needed, or else it won't log levels <= to 'info'
+})
 
-  const logdna_options = {
-    key: 'abc123'
-  }
-  logger.add(new logdnaWinston(logdna_options))
+const logdna_options = {
+  key: 'abc123'
+}
+logger.add(new logdnaTransport(logdna_options))
 
-  // Now the custom levels can be logged in Winston and LogDNA
-  logger.ludicrous('Some text')
+// Now the custom levels can be logged in Winston and LogDNA
+logger.ludicrous('Some text')
 
-  logger.log({
-    msg: 'Custom level log message'
-  , key: 'value'
-  , bool: true
-  , level: 'loquacious'
-  })
+logger.log({
+  msg: 'Custom level log message'
+, key: 'value'
+, bool: true
+, level: 'loquacious'
+})
 ```
 
 ## The `maxLevel` Parameter
